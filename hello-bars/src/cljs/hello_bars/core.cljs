@@ -6,10 +6,6 @@
   (:require [c2.scale :as scale]
             [c2.event :as event]))
 
-
-(defn my_func []
-  (str "js/alert" "ja"))
-
 (bind! "#bars" 
   (let [width 500 bar-height 20
         data {"A" 1, "B" 2, "C" 4, "D" 3}
@@ -26,6 +22,9 @@
                       [:span {:style {:color "white"}} label]]))]))
 
 (event/on "#bars" ".pepe" :click
-          (fn [[a b] d  _ e]
+          (fn [[a b] d  e]
+            (js/console.dir (.-target e))
+            (bind! "#result" [:div "listen and adding info in event!"])
+
             (js/console.log (str (apply str a) " - " b))
             ))

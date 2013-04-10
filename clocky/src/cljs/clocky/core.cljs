@@ -20,8 +20,9 @@
               angle1 (/ (* Tau v) 100)
               angle2 (+ angle1 Pi)
               angle3 (+ angle2 Pi)
-              radius (get radii k)]
-          [:g.slice
+              radius (get radii k)
+              rot (+ angle1 4)]
+          [:g.slice 
             [:path {:class (str (name k) "1")
                     :d (arc :outer-radius radius
                             :start-angle angle1
