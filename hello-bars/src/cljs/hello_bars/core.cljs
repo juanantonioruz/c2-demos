@@ -1,7 +1,14 @@
 (ns hello-bars.core
   (:use-macros [c2.util :only [bind!]])
-  (:use [c2.core :only [unify]])
-  (:require [c2.scale :as scale]))
+  (:use [c2.core :only [unify]]
+        )
+  
+  (:require [c2.scale :as scale]
+            [c2.event :as event]))
+
+
+(defn my_func []
+  (str "js/alert" "ja"))
 
 (bind! "#bars" 
   (let [width 500 bar-height 20
@@ -11,7 +18,14 @@
 
     [:div
      (unify data (fn [[label val]]
-                   [:div {:style {:height bar-height
+                   [:div.pepe {:style {:height bar-height
                                   :width (s val)
-                                  :background-color "gray"}}
+                                  :background-color "gray" :class "pepe"}
+                          }
+                    
                       [:span {:style {:color "white"}} label]]))]))
+
+(event/on "#bars" ".pepe" :click
+          (fn [[a b] d  _ e]
+            (js/console.log (str (apply str a) " - " b))
+            ))
